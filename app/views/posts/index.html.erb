@@ -1,0 +1,72 @@
+
+
+<div class="panel is-info">
+  
+  <h1 class="panel-heading">Exclusive Clubhouse<h2>
+
+</div>
+
+
+<table class="box">
+  <thead>
+    <tr>
+<% if user_signed_in? %>
+    <th style="color: brown;padding-right: 20px">Author Name</th>
+    <th style="color: brown;padding-right: 20px">Author Username</th>
+    
+   
+    <% end %>
+      <th style="color: brown;padding-right: 20px">Secret Post</th>
+      <th style="color: brown;padding-right: 20px">User_Id</th>
+      <th colspan="6"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+
+    <% @posts.each do |post| %>
+    <tr>
+      <% if user_signed_in? %>
+      <td style="padding-right: 20px"><%= post.user.name %></td>
+      <td style="padding-right: 20px"><%= post.user.username %></td>
+      <% end %>
+
+      <td style="padding-right: 20px"><%= post.content %></td>
+      <td style="padding-right: 20px"><%= post.user_id %></td>
+      
+
+     
+     <% if user_signed_in? %>
+      <td style="padding-right: 20px"><%= link_to 'Show', post %></td>
+      <td style="padding-right: 20px"><%= link_to 'Edit', edit_post_path(post) %></td>
+      <td style="padding-right: 20px"><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <% end %>
+    
+
+     
+      
+       
+      </tr>
+    <% end %>
+  </tbody>
+
+</table>
+
+<br>
+  
+<% if user_signed_in? %>
+<div class="box">
+  <div style="border: 30px;">
+      <button class="button is-dark"><%= link_to 'New Post', new_post_path, class: "btn" %></button>
+   
+      <button class="button is-dark"><%= link_to 'Log Out', destroy_user_session_path, method: :delete, class: "btn" %></button>
+  </div>
+    <% else %>
+  <div style="border: 30px;">
+    <button class="button is-dark"><%= link_to 'Log In', new_user_session_path, class: "btn" %></button>
+
+      <button class="button is-dark"> <%= link_to 'Create Account', new_user_registration_path, class: "btn" %></button>
+    </div>
+</div>
+<%end %>
+  </div>
